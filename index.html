@@ -3,80 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>わてのホームページ</title>
+    <title>インタラクティブホームページ</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f0f0f0;
         }
-        header {
-            background: #35424a;
-            color: #ffffff;
-            padding: 10px 0;
+        .header {
+            background-color: #2196F3;
+            color: white;
+            text-align: center;
+            padding: 2em;
+            transition: background-color 0.3s;
+        }
+        .nav {
+            background-color: #333;
+            padding: 1em;
             text-align: center;
         }
-        nav {
-            margin: 20px 0;
-        }
-        nav a {
-            margin: 0 15px;
-            color: #ffffff;
+        .nav-link {
+            color: white;
             text-decoration: none;
+            padding: 1em;
+            margin: 0 10px;
         }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 2em;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        footer {
-            background: #35424a;
-            color: #ffffff;
-            text-align: center;
-            padding: 10px 0;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
+        .theme-button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
+    <div class="header" id="header">
+        <h1>ようこそ</h1>
+    </div>
 
-<header>
-    <h1>わしのホームページへようこそ</h1>
-    <nav>
-        <a href="#about">私について</a>
-        <a href="#services">サービス</a>
-        <a href="#contact">お問い合わせ</a>
-    </nav>
-</header>
+    <div class="nav">
+        <a href="#" class="nav-link">ホーム</a>
+        <a href="#" class="nav-link">プロフィール</a>
+        <a href="#" class="nav-link">お問い合わせ</a>
+    </div>
 
-<div class="container">
-    <section id="about">
-        <h2>meについて</h2>
-        <p>ここに自己紹介や趣味についての情報を記載します。</p>
-        <img src="https://via.placeholder.com/600x300" alt="サンプル画像">
-    </section>
+    <div class="content">
+        <h2>テーマを変更</h2>
+        <button class="theme-button" onclick="changeTheme('blue')">ブルー</button>
+        <button class="theme-button" onclick="changeTheme('green')">グリーン</button>
+        <button class="theme-button" onclick="changeTheme('purple')">パープル</button>
 
-    <section id="services">
-        <h2>サービス</h2>
-        <p>提供しているサービスの詳細をここに記載します。</p>
-    </section>
+        <h2>時計</h2>
+        <div id="clock"></div>
 
-    <section id="contact">
-        <h2>お問い合わせ</h2>
-        <p>お問い合わせは<a href="mailto:example@example.com">こちら</a>からどうぞ。</p>
-    </section>
-</div>
+        <h2>メッセージ</h2>
+        <div id="message"></div>
+    </div>
 
-<footer>
-    <p>&copy; 2023 私のホームページ</p>
-</footer>
+    <script>
+        // テーマ変更機能
+        function changeTheme(color) {
+            const colors = {
+                blue: '#2196F3',
+                green: '#4CAF50',
+                purple: '#9C27B0'
+            };
+            document.getElementById('header').style.backgroundColor = colors[color];
+        }
 
+        // デジタル時計
+        function updateClock() {
+            const now = new Date();
+            const time = now.toLocaleTimeString('ja-JP');
+            document.getElementById('clock').textContent = time;
+        }
+        setInterval(updateClock, 1000);
+
+        // ウェルカムメッセージ
+        const messages = ['こんにちは！', 'ようこそ!', '今日も良い一日を！'];
+        function changeMessage() {
+            const messageEl = document.getElementById('message');
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            messageEl.textContent = randomMessage;
+        }
+        setInterval(changeMessage, 3000);
+    </script>
 </body>
 </html>
